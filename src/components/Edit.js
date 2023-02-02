@@ -4,11 +4,9 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Avatar } from "@mui/material"
-import { Breadcrumb, Col, Form, Input, Label, Row } from 'reactstrap';
 import { LoadingButton } from '@mui/lab';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CardMedia from '@mui/material/CardMedia';
-import Dashboard from './Dashboard';
 
 export default function Edit() {
 
@@ -30,10 +28,8 @@ export default function Edit() {
     const [formValues, setFormValues] = useState([]);
 
     const onEdit = () => {
-
         localStorage.setItem("notes", JSON.stringify([...notes, data]))
         notes = JSON.parse(localStorage.getItem("notes"));
-
     }
 
 
