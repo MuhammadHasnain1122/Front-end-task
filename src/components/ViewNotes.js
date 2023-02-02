@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
 import { CardMedia } from '@mui/material'
 import { json, useNavigate } from 'react-router-dom';
+import { LoadingButton } from '@mui/lab';
 
 
 
@@ -36,7 +37,7 @@ export default function ViewNotes() {
 
     const update = (key, item) => {
 
-        navigate("/add", {
+        navigate("/edit", {
             state: {
                 key, item
             }
@@ -46,8 +47,14 @@ export default function ViewNotes() {
     return (
         <>
             <div className="  p-5 ">
-
+                <div>
+                <LoadingButton onClick={navigateTo}>
+                    Go Back To Dashboard
+                 </LoadingButton>
+                </div>
+               
                 <div className="flex justify-center">
+                   
                     <h1 style={{ fontSize: 40, fontWight: 40 }}>
 
                         View All Notes

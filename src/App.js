@@ -5,6 +5,7 @@ import AddNotes from './components/AddNotes';
 import ViewNotes from './components/ViewNotes';
 import Dashboard from './components/Dashboard';
 import { useState } from 'react';
+import Edit from './components/Edit';
 
 function App() {
 const notes = localStorage.getItem("notes");
@@ -15,6 +16,7 @@ const notes = localStorage.getItem("notes");
     <Routes>
       <Route exact path="/add" element={<AddNotes />}></Route>
       <Route exact path="/view" element={<ViewNotes/>}></Route>
+      <Route exact path="/edit" element={<Edit/>}></Route>
       <Route exact path="/" element={<Dashboard />}></Route>
     </Routes>
   );
