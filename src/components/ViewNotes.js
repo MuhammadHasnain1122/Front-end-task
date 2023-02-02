@@ -8,52 +8,45 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
 import { CardMedia } from '@mui/material'
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 
-// function createData(name, calories, fat, carbs, protein) {
-//     return { name, calories, fat, carbs, protein };
-// }
 
-// const rows = [
-//     createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//     createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//     createData('Eclair', 262, 16.0, 24, 6.0),
-//     createData('Cupcake', 305, 3.7, 67, 4.3),
-//     createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
 
 export default function ViewNotes() {
+    const [notes, setNotes] = useState(JSON.parse(localStorage.getItem("notes")));
 
-    const [getData, setGetData] = useState([{}]);
+
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const data = localStorage.getItem("formValues");
-        localStorage.setItem("formValues", data);
-        setGetData(JSON.parse(data))
-        console.log(getData, "pl")
 
-    }, []);
- 
 
     const navigateTo = () => {
         navigate("/")
     }
-  
-    const onDelete = (id) => {
-      const afterDelete =  getData.filter(object => {
-            return object.id !== id;
-          });
 
+    const onDelete = (id) => {
+        console.log(id, "kkk")
+        const newArr = notes.filter((a, key) => {
+            return key !== id;
+        });
+
+        localStorage.setItem("notes", JSON.stringify(newArr));
+        setNotes(newArr)
     }
+
+    const update = (key, item) => {
+
+        navigate("/add", {
+            state: {
+                key, item
+            }
+        })
+    }
+
     return (
         <>
             <div className="  p-5 ">
-                <div className="flex justify-start">
-                    <Button  onClick={navigateTo}>
-                        Back
-                    </Button>
-                </div>
+
                 <div className="flex justify-center">
                     <h1 style={{ fontSize: 40, fontWight: 40 }}>
 
@@ -78,7 +71,8 @@ export default function ViewNotes() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {getData?.map((row, key) => (
+                            {notes?.map((row, key) => (
+
 
                                 <TableRow
 
@@ -98,10 +92,10 @@ export default function ViewNotes() {
                                         />
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Button>
+                                        <Button onClick={e => update(key, row)}>
                                             Edit
                                         </Button>
-                                        <Button onClick={onDelete(key)}>
+                                        <Button onClick={e => onDelete(key)}>
                                             Delete
                                         </Button>
                                     </TableCell>
